@@ -92,5 +92,5 @@ func User(c *fiber.Ctx) error {
 	database.DB.Where("id = ?", claims["userId"]).First(&user)
 
 	return c.Status(http.StatusOK).JSON(user)
-	
+
 }

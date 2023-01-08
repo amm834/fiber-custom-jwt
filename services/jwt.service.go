@@ -39,3 +39,18 @@ func Claims(tokenString string) (jwt.MapClaims, error) {
 		return nil, err
 	}
 }
+
+func IsExpireToken(tokenString string) (bool, error) {
+	claims, err := Claims(tokenString)
+
+	if err != nil {
+		return false, err
+	}
+
+	if time.Now().Unix() > int64(claims["expire"].(float64)) {
+		return true, nil
+	}
+
+	return false, nil
+
+}
